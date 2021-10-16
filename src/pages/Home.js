@@ -19,7 +19,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Home Page</h1>
+      <h1>Home Page </h1>
       <h5>Welcome</h5>
       <button onClick={getClassRoomListHandler}>Get classRoom list</button>
       <CoursesList courses={courses} />
