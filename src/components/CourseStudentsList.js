@@ -3,7 +3,7 @@ const CourseStudentsList = ({ studentsArray }) => {
     <ul>
       {studentsArray && studentsArray.length > 0 ? (
         studentsArray.map((student) => (
-          <li key={student.profile.Id}>
+          <li key={student.profile.id}>
             <p>Imie: {student.profile.name.givenName}</p>
             <p>Nazwisko: {student.profile.name.familyName}</p>
             <p>E-mail: {student.profile.emailAddress}</p>

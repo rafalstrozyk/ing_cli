@@ -3,12 +3,14 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import CourseTeachersList from '../components/CourseTeachersList';
 import CourseStudentsList from '../components/CourseStudentsList';
+import CourseWorksList from '../components/CourseWorksList';
 
 const Course = () => {
-  const [teachers, setTeachers] = useState(null);
-  const [students, setStudents] = useState(null);
-  const [course, setCourse] = useState(null);
-  const { course_id } = useParams();
+  const [teachers, setTeachers] = useState(null),
+    [students, setStudents] = useState(null),
+    [course, setCourse] = useState(null),
+    [works, setWorks] = useState(null),
+    { course_id } = useParams();
   useEffect(() => {
     axios
       .get('http://localhost:9000/classroom/api/course', {
@@ -34,7 +36,7 @@ const Course = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        setWorks(res.data.courseWork);
       });
   };
 
@@ -80,6 +82,8 @@ const Course = () => {
           <CourseTeachersList teachersArray={teachers} />
           <h3>Uczniowie</h3>
           <CourseStudentsList studentsArray={students} />
+          <h3>Zadania</h3>
+          <CourseWorksList worksArray={works} />
         </>
       )}
     </div>
