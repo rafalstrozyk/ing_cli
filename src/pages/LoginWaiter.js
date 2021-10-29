@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { setIsLogin } from '../redux/actions/userActions';
 import axios from 'axios';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const LoginWaiter = () => {
+const LoginWaiter = ({ setIsLogin, isLogin }) => {
   const query = useQuery();
   const history = useHistory();
+
 
   useEffect(() => {
     if (query.get('code') && query.get('code').length > 0) {
@@ -19,12 +23,18 @@ const LoginWaiter = () => {
         })
         .then((res) => {
           console.log(res);
+          if (res.data.isLogin) {
+            setIsLogin(res.data.isLogin);
+          }
+
           history.push('/');
         });
     } else {
-      history.push('/login');
+      if (!isLogin) {
+        history.push('/login');
+      }
     }
-  }, [query, history]);
+  }, [query, history, setIsLogin, isLogin]);
 
   return (
     <div>
@@ -33,4 +43,10 @@ const LoginWaiter = () => {
   );
 };
 
-export default LoginWaiter;
+const mapStateToProps = (state) => {
+  return {
+    isLogin: state.user.isLogin,
+  };
+};
+
+export default connect(mapStateToProps, { setIsLogin })(LoginWaiter);

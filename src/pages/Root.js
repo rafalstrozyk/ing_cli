@@ -3,21 +3,18 @@ import Login from './Login';
 import Home from './Home';
 import LoginWaiter from './LoginWaiter';
 import Course from './Course';
+import PrivateRoute from '../Router/PrivateRoute';
 
 const Root = () => (
   <Switch>
-    <Route exact path="/">
-      <Home />
-    </Route>
-    <Route path="/login">
+    <PrivateRoute exact path='/' component={Home}></PrivateRoute>
+    <Route path='/login'>
       <Login />
     </Route>
-    <Route path="/login_waiter">
+    <Route path='/login_waiter'>
       <LoginWaiter />
     </Route>
-    <Route path="/courses/:course_id">
-      <Course />
-    </Route>
+    <PrivateRoute path='/courses/:course_id' component={Course}></PrivateRoute>
   </Switch>
 );
 

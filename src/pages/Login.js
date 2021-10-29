@@ -1,14 +1,37 @@
 import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import { useHistory } from 'react-router';
+import { connect } from 'react-redux';
 import axios from 'axios';
+import { setIsLogin, setUserProfile } from '../redux/actions/userActions';
 
-const Login = () => {
+const Login = ({ setIsLogin, setUserProfile }) => {
+  const [cookies] = useCookies(['jwt']);
+  const history = useHistory();
   const [link, setLink] = useState('');
+  useEffect(() => {
+    if (cookies.jwt) {
+      axios
+        .get('http://localhost:9000/user/user_profile', {
+          withCredentials: true,
+        })
+        .then((res) => {
+          if (res.data.id) {
+            setIsLogin(res.data.isLogin);
+            setUserProfile(res.data);
+            history.push('/');
+          }
+        });
+    }
+  }, [cookies, setUserProfile, setIsLogin, history]);
+
   useEffect(() => {
     axios.get('http://localhost:9000/user/google_login_link').then((res) => {
       setLink(res.data.loginLink);
       console.log(res);
     });
   }, []);
+
   return (
     <div>
       <h1>Login Page</h1>
@@ -18,4 +41,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default connect(null, { setUserProfile, setIsLogin })(Login);

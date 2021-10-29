@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
 import CourseTeachersList from '../components/CourseTeachersList';
 import CourseStudentsList from '../components/CourseStudentsList';
 import CourseWorksList from '../components/CourseWorksList';
+import { setIsLogin } from '../redux/actions/userActions';
 
-const Course = () => {
+const Course = ({ setIsLogin, isLogin }) => {
   const [teachers, setTeachers] = useState(null),
     [students, setStudents] = useState(null),
     [course, setCourse] = useState(null),
@@ -18,14 +20,41 @@ const Course = () => {
         params: {
           course_id: course_id,
         },
-        data: {
+      })
+      .then((res) => {
+        setIsLogin(res.data.isLogin);
+        setCourse(res.data.course);
+      });
+  }, [setCourse, course_id, setIsLogin, isLogin]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:9000/classroom/api/course/students_list', {
+        withCredentials: true,
+        params: {
           course_id: course_id,
         },
       })
       .then((res) => {
-        setCourse(res.data);
+        console.log(res.data);
+
+        setIsLogin(res.data.isLogin);
+        setStudents(res.data.students);
       });
-  }, [setCourse, course_id]);
+  }, [setStudents, course_id, setIsLogin]);
+  useEffect(() => {
+    axios
+      .get('http://localhost:9000/classroom/api/course/teachers_list', {
+        withCredentials: true,
+        params: {
+          course_id: course_id,
+        },
+      })
+      .then((res) => {
+        setIsLogin(res.data.isLogin);
+        setTeachers(res.data.teachers);
+      });
+  }, [setTeachers, course_id, setIsLogin]);
 
   const getWorksList = () => {
     axios
@@ -40,31 +69,6 @@ const Course = () => {
       });
   };
 
-  const getTeachersListHandler = () => {
-    axios
-      .get('http://localhost:9000/classroom/api/course/teachers_list', {
-        withCredentials: true,
-        params: {
-          course_id: course_id,
-        },
-      })
-      .then((res) => {
-        setTeachers(res.data.teachers);
-      });
-  };
-  const getStudentsListHandler = () => {
-    axios
-      .get('http://localhost:9000/classroom/api/course/students_list', {
-        withCredentials: true,
-        params: {
-          course_id: course_id,
-        },
-      })
-      .then((res) => {
-        setStudents(res.data.students);
-      });
-  };
-
   return (
     <div>
       {course && (
@@ -75,8 +79,6 @@ const Course = () => {
           <p>pokój: {course.room}</p>
           <p>mail grópowy: {course.courseGroupEmail}</p>
           <p>mail grópowy nauczycieli: {course.teacherGroupEmail}</p>
-          <button onClick={getTeachersListHandler}>Teachers list</button>
-          <button onClick={getStudentsListHandler}>Students list</button>
           <button onClick={getWorksList}>Course works</button>
           <h3>Nauczyciele</h3>
           <CourseTeachersList teachersArray={teachers} />
@@ -90,4 +92,10 @@ const Course = () => {
   );
 };
 
-export default Course;
+const mapStateToProps = (state) => {
+  return {
+    isLogin: state.user.isLogin,
+  };
+};
+
+export default connect(mapStateToProps, { setIsLogin })(Course);
