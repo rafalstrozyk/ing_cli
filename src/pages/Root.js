@@ -7,14 +7,23 @@ import PrivateRoute from '../Router/PrivateRoute';
 
 const Root = () => (
   <Switch>
-    <PrivateRoute exact path='/' component={Home}></PrivateRoute>
     <Route path='/login'>
       <Login />
     </Route>
     <Route path='/login_waiter'>
       <LoginWaiter />
     </Route>
-    <PrivateRoute path='/courses/:course_id' component={Course}></PrivateRoute>
+    <PrivateRoute
+   
+      exact
+      path='/'
+      component={Home}
+    ></PrivateRoute>
+    <PrivateRoute
+      
+      path='/courses/:course_id'
+      component={Course}
+    ></PrivateRoute>
   </Switch>
 );
 

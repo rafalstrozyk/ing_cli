@@ -70,7 +70,7 @@ const Course = ({ setIsLogin, isLogin }) => {
   };
 
   return (
-    <div>
+    <div className='grid-site'>
       {course && (
         <>
           <h1>{course.name}</h1>

@@ -2,7 +2,7 @@ import { SET_IS_LOGIN, GET_USER_PROFILE } from '../types';
 
 const initialState = {
   isLogin: false,
-  userProfile: {},
+  userProfile: null,
 };
 
 export default function reducer(state = initialState, action) {
