@@ -9,21 +9,22 @@ const Login = ({ setIsLogin, setUserProfile }) => {
   const [cookies] = useCookies(['jwt']);
   const history = useHistory();
   const [link, setLink] = useState('');
-  useEffect(() => {
-    if (cookies.jwt) {
-      axios
-        .get('http://localhost:9000/user/user_profile', {
-          withCredentials: true,
-        })
-        .then((res) => {
-          if (res.data.id) {
-            setIsLogin(res.data.isLogin);
-            setUserProfile(res.data);
-            history.push('/');
-          }
-        });
-    }
-  }, [cookies, setUserProfile, setIsLogin, history]);
+  // useEffect(() => {
+  //   if (cookies.jwt) {
+  //     axios
+  //       .get('http://localhost:9000/user/user_profile', {
+  //         withCredentials: true,
+  //       })
+  //       .then(async (res) => {
+  //         if (res.data.id) {
+  //           await setUserProfile(res.data);
+  //           console.log(res.data);
+  //           await setIsLogin(res.data.isLogin);
+  //           history.push('/');
+  //         }
+  //       });
+  //   }
+  // }, [cookies, setUserProfile, setIsLogin, history]);
 
   useEffect(() => {
     axios.get('http://localhost:9000/user/google_login_link').then((res) => {

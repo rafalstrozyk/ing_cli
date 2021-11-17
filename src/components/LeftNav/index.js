@@ -11,17 +11,19 @@ const LeftNav = ({ user }) => {
     history.location.pathname.search('/courses/') !== -1
       ? setIsCoursePage(true)
       : setIsCoursePage(false);
-  }, [history.location.pathname, setIsCoursePage]);
+  }, [history, setIsCoursePage]);
 
   return (
     <>
-      {user.isLogin && user.userProfile && (
-        <div className='grid-navigation root'>
-          <h3>{user.userProfile.name.fullName}</h3>
-          <p>{user.userProfile.emailAddress}</p>
-          {isCoursePage && <button>Test</button>}
-        </div>
-      )}
+      {user.isLogin &&
+        user.userProfile &&
+        (
+          <div className='grid-navigation nav-root'>
+            <h3>{user.userProfile.name.fullName}</h3>
+            <p>{user.userProfile.emailAddress}</p>
+            {isCoursePage && <button>Test</button>}
+          </div>
+        )}
     </>
   );
 };
