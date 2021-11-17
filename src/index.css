@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400&display=swap');
 
 /* RESETS */
 * {
@@ -8,13 +8,15 @@
   box-sizing: border-box;
 }
 
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Merriweather', serif;
   font-weight: 300;
+  background-color: #f7f7f7;
 }
 
 ul {
@@ -31,7 +33,33 @@ input {
 }
 
 button {
+  background: rgb(42,69,148);
+ background: linear-gradient(180deg, rgba(42,69,148,1) 53%, rgba(65,95,184,1) 92%);
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 8px;
+  color: #F6F8FC;
+  font-family: Brush Script MT;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px;
+  text-shadow: 1px 1px 20px #000000;
+  border: solid #2A4594 0px;
+  text-decoration: none;
+  display: inline-block;
   cursor: pointer;
+  box-shadow: 1px 2px 5px  rgba(0,0,0,0.3);
+  font-family: 'Merriweather', serif;
+  font-weight: 400;
+}
+
+button:hover{
+  border: solid #337FED 0px;
+  background: #2A4594;
+  background: rgb(51,127,237);
+background: linear-gradient(0deg, rgba(51,127,237,1) 0%, rgba(42,69,148,1) 100%);
+  text-decoration: none;
+  box-shadow: 1px 2px 5px  rgba(0,0,0,0.6);
 }
 
 img {
