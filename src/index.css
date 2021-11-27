@@ -84,3 +84,39 @@ img {
 .grid-site {
   grid-area: site;
 }
+
+li{
+  padding-left: 10px;
+  box-shadow: inset black 0px 0px 5px;
+  border-radius: 4pt;
+}
+
+.fst{
+  border: solid #2A4594 3px;
+  border-radius: 7pt;
+  background-color: #337FED;
+  color: #F6F8FC;
+  font-size: 25px;
+  box-shadow: black 3px 3px 10px;
+  box-shadow: inset black 0px 0px 10px;
+}
+
+.snd{
+  border: solid #337FED;
+  border-radius: 7pt;
+  background-color: #6098e7;
+  color: #F6F8FC;
+  font-size: 22px;
+  box-shadow: black 3px 3px 10px;
+  box-shadow: inset black 0px 0px 10px;
+}
+
+.trd{
+  border: solid #6098e7;
+  border-radius: 7pt;
+  background-color: #7ca7e2;
+  color: #F6F8FC;
+  font-size: 20px;
+  box-shadow: black 3px 3px 10px;
+  box-shadow: inset black 0px 0px 10px;
+}
