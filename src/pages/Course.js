@@ -69,6 +69,19 @@ const Course = ({ setIsLogin, isLogin }) => {
       });
   };
 
+  const getFullRank = () => {
+    axios
+      .get('http://localhost:9000/classroom/api/course/full_rank', {
+        withCredentials: true,
+        params: {
+          course_id: course_id,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  };
+
   return (
     <div className='grid-site'>
       {course && (
@@ -80,6 +93,7 @@ const Course = ({ setIsLogin, isLogin }) => {
           <p>mail grópowy: {course.courseGroupEmail}</p>
           <p>mail grópowy nauczycieli: {course.teacherGroupEmail}</p>
           <button onClick={getWorksList}>Course works</button>
+          <button onClick={getFullRank}>Course works</button>
           <h3>Nauczyciele</h3>
           <CourseTeachersList teachersArray={teachers} />
           <h3>Uczniowie</h3>
