@@ -6,6 +6,8 @@ import CourseTeachersList from '../components/CourseTeachersList';
 import CourseStudentsList from '../components/CourseStudentsList';
 import CourseWorksList from '../components/CourseWorksList';
 import { setIsLogin } from '../redux/actions/userActions';
+import RankList from '../components/RankList';
+const ranks = [3,5,6,7];
 
 const Course = ({ setIsLogin, isLogin }) => {
   const [teachers, setTeachers] = useState(null),
@@ -86,6 +88,7 @@ const Course = ({ setIsLogin, isLogin }) => {
     <div className='grid-site'>
       {course && (
         <>
+        <RankList  />
           <h1>{course.name}</h1>
           <p>sekcja: {course.section}</p>
           <p>deskrypcja: {course.descriptionHeading}</p>
