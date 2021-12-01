@@ -7,7 +7,10 @@ import CourseStudentsList from '../components/CourseStudentsList';
 import CourseWorksList from '../components/CourseWorksList';
 import { setIsLogin } from '../redux/actions/userActions';
 import RankList from '../components/RankList';
+<<<<<<< HEAD
 const ranks = [3, 5, 6, 7];
+=======
+>>>>>>> 1f39548e0c22c91e0952586ccd65e5dd0a0acc49
 
 const Course = ({ setIsLogin, isLogin }) => {
   const [teachers, setTeachers] = useState(null),
@@ -71,6 +74,19 @@ const Course = ({ setIsLogin, isLogin }) => {
       });
   };
 
+  const getFullRank = () => {
+    axios
+      .get('http://localhost:9000/classroom/api/course/full_rank', {
+        withCredentials: true,
+        params: {
+          course_id: course_id,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+  };
+
   return (
     <div className='grid-site'>
       {course && (
@@ -83,6 +99,7 @@ const Course = ({ setIsLogin, isLogin }) => {
           <p>mail grópowy: {course.courseGroupEmail}</p>
           <p>mail grópowy nauczycieli: {course.teacherGroupEmail}</p>
           <button onClick={getWorksList}>Course works</button>
+          <button onClick={getFullRank}>Course works</button>
           <h3>Nauczyciele</h3>
           <CourseTeachersList teachersArray={teachers} />
           <h3>Uczniowie</h3>
