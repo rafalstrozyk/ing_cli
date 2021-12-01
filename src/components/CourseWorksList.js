@@ -1,22 +1,23 @@
 import { useState } from 'react';
 import axios from 'axios';
+import RankList from './RankList';
 
 const CourseWorksList = ({ worksArray }) => {
-  const [submisionWorksList, setSubmisionWorksList] = useState(null);
-  function handleGetSubmisionList(course_id, work_id) {
-    console.log('lol');
-    axios
-      .get('http://localhost:9000/classroom/api/course/work_list_submissions', {
-        withCredentials: true,
-        params: {
-          course_id: course_id,
-          course_work_id: work_id,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-      });
-  }
+  // const [submisionWorksList, setSubmisionWorksList] = useState(null);
+  // const [showRank, setShowRank] = useState(false)
+  // function handleGetSubmisionList(course_id, work_id) {
+  //   axios
+  //     .get('http://localhost:9000/classroom/api/course/work_list_submissions', {
+  //       withCredentials: true,
+  //       params: {
+  //         course_id: course_id,
+  //         course_work_id: work_id,
+  //       },
+  //     })
+  //     .then((res) => {
+
+  //     });
+  // }
   return (
     <ul>
       {worksArray && worksArray.length > 0 ? (
@@ -25,11 +26,13 @@ const CourseWorksList = ({ worksArray }) => {
             <p>{work.title}</p>
             <p>{work.updateTime}</p>
             <p>{work.description}</p>
-            <button
-              onClick={() => handleGetSubmisionList(work.courseId, work.id)}
-            >
-              Zgłoszenia uczniów{' '}
-            </button>
+            {work && (
+              <RankList
+                workTitle={work.title}
+                courseId={work.courseId}
+                workId={work.id}
+              />
+            )}
           </li>
         ))
       ) : (
