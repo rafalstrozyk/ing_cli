@@ -7,17 +7,28 @@ import CourseStudentsList from '../components/CourseStudentsList';
 import CourseWorksList from '../components/CourseWorksList';
 import { setIsLogin } from '../redux/actions/userActions';
 import RankList from '../components/RankList';
-<<<<<<< HEAD
-const ranks = [3, 5, 6, 7];
-=======
->>>>>>> 1f39548e0c22c91e0952586ccd65e5dd0a0acc49
+import RankListMean from '../components/RankListMean';
 
 const Course = ({ setIsLogin, isLogin }) => {
   const [teachers, setTeachers] = useState(null),
     [students, setStudents] = useState(null),
     [course, setCourse] = useState(null),
     [works, setWorks] = useState(null),
+    [fullRank, setFullRank] = useState(null),
     { course_id } = useParams();
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:9000/classroom/api/course/full_rank', {
+        withCredentials: true,
+        params: {
+          course_id: course_id,
+        },
+      })
+      .then((res) => {
+        setFullRank(res.data);
+      });
+  }, [setFullRank]);
   useEffect(() => {
     axios
       .get('http://localhost:9000/classroom/api/course', {
@@ -74,38 +85,34 @@ const Course = ({ setIsLogin, isLogin }) => {
       });
   };
 
-  const getFullRank = () => {
-    axios
-      .get('http://localhost:9000/classroom/api/course/full_rank', {
-        withCredentials: true,
-        params: {
-          course_id: course_id,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-      });
-  };
-
   return (
     <div className='grid-site'>
       {course && (
         <>
-          <RankList />
-          <h1>{course.name}</h1>
-          <p>sekcja: {course.section}</p>
-          <p>deskrypcja: {course.descriptionHeading}</p>
-          <p>pokój: {course.room}</p>
-          <p>mail grópowy: {course.courseGroupEmail}</p>
-          <p>mail grópowy nauczycieli: {course.teacherGroupEmail}</p>
-          <button onClick={getWorksList}>Course works</button>
-          <button onClick={getFullRank}>Course works</button>
-          <h3>Nauczyciele</h3>
-          <CourseTeachersList teachersArray={teachers} />
-          <h3>Uczniowie</h3>
-          <CourseStudentsList studentsArray={students} />
-          <h3>Zadania</h3>
-          <CourseWorksList worksArray={works} />
+          <div className='container-center'>
+            <h1>{course.name}</h1>
+          </div>
+
+          <div className='container'>
+            <div>
+              <p>sekcja: {course.section}</p>
+              <p>deskrypcja: {course.descriptionHeading}</p>
+              <p>pokój: {course.room}</p>
+              <p>mail grupowy: {course.courseGroupEmail}</p>
+              <p>mail grupowy nauczycieli: {course.teacherGroupEmail}</p>
+              <button onClick={getWorksList}>Course works</button>
+              <h3>Nauczyciele</h3>
+              <CourseTeachersList teachersArray={teachers} />
+              <h3>Uczniowie</h3>
+              <CourseStudentsList studentsArray={students} />
+              <h3>Zadania</h3>
+              <CourseWorksList worksArray={works} />
+            </div>
+            <div>
+              <h3 className='ranking-header'>Najlepsi Uczniowie</h3>
+              <RankListMean rankList={fullRank} />
+            </div>
+          </div>
         </>
       )}
     </div>

@@ -44,8 +44,11 @@ const RankList = ({ courseId, workId, workTitle }) => {
                   </li>
                 ) : (
                   <li key={index} className='list-rank-li'>
-                    {index + 1}. {item.userId} otrzymał {item.assignedGrade}{' '}
-                    punktów{' '}
+                    <div>
+                      {' '}
+                      {index + 1}. {item.userId} otrzymał {item.assignedGrade}{' '}
+                      punktów{' '}
+                    </div>
                   </li>
                 )}
               </>

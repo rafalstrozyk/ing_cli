@@ -136,3 +136,19 @@ img {
 .list-rank > *:not(:first-child) {
   margin-top: 10px;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 4px;
+}
+
+.ranking-header {
+  font-size: 25px;
+}
+
+.containter-center {
+  display: 'flex';
+  width: '100%';
+  justify-content: 'center';
+}
