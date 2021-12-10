@@ -4,6 +4,8 @@ import { useHistory } from 'react-router';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { setIsLogin, setUserProfile } from '../redux/actions/userActions';
+import { ReactComponent as BookLogo } from '../Assets/BookLogo.svg';
+import background from '../Assets/Background.svg';
 
 const Login = ({ setIsLogin, setUserProfile }) => {
   const [cookies] = useCookies(['jwt']);
@@ -34,10 +36,18 @@ const Login = ({ setIsLogin, setUserProfile }) => {
   }, []);
 
   return (
-    <div>
-      <h1>Login Page</h1>
-
-      {link.length > 0 ? <a href={link}>Login link</a> : null}
+    <div
+      className='container-center full-screen'
+      style={{ backgroundImage: `url(${background})` }}
+    >
+      <div>
+        <BookLogo fill='red' stroke='#2A4594' />
+        <h1>WWSSE Grywalizacja</h1>
+        <div className='container-center m-t-1'>
+          <h2 className='m-b-2'>Logowanie</h2>
+          {link.length > 0 ? <a href={link}>Login link</a> : null}
+        </div>
+      </div>
     </div>
   );
 };

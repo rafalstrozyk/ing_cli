@@ -9,12 +9,9 @@ import store from './redux/store';
 function App() {
   return (
     <ReduxProvider store={store}>
-      <div className='grid grid-site-nav'>
-        <Router>
-          <LeftNav />
-          <Root />
-        </Router>
-      </div>
+      <Router>
+        <Root />
+      </Router>
     </ReduxProvider>
   );
 }

@@ -100,7 +100,7 @@ const Course = ({ setIsLogin, isLogin }) => {
     <div className='grid-site'>
       {course ? (
         <>
-          <div className='container-center m-t-1'>
+          <div className='m-t-1'>
             <h1>{course.name}</h1>
           </div>
 

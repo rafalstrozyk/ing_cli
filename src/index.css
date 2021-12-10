@@ -35,7 +35,8 @@ input {
   outline: none;
 }
 
-button {
+button,
+a {
   background: rgb(42, 69, 148);
   background: linear-gradient(
     180deg,
@@ -60,7 +61,8 @@ button {
   font-weight: 400;
 }
 
-button:hover {
+button:hover,
+a:hover {
   border: solid #337fed 0px;
   background: #2a4594;
   background: rgb(51, 127, 237);
@@ -178,10 +180,17 @@ img {
   margin-bottom: 6px;
 }
 
-.containter-center {
-  display: 'flex';
-  width: '100%';
-  justify-content: 'center';
+.container-center {
+  display: flex;
+
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.full-screen {
+  width: 100vw;
+  height: 100vh;
 }
 
 .dots {
@@ -194,6 +203,9 @@ img {
   background-size: calc(100% / 3) 12px;
   background-repeat: no-repeat;
   animation: d 1s infinite linear;
+}
+.book-logo {
+  fill: rgb(42, 69, 148);
 }
 @keyframes d {
   20% {
