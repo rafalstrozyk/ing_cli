@@ -1,34 +1,32 @@
-import { useState } from 'react';
-import axios from 'axios';
-
-const RankListMean = ({ rankList }) => {
+const RankListMean = ({ rankList, students }) => {
   return (
     <ul className='list-rank'>
-      {rankList &&
+      {rankList ?
         rankList.map((item, index) => (
           <>
             {index === 0 ? (
               <li className='list-rank-li-fst' key={item.userId}>
-                {index + 1}. {item.userId} otrzymał {item.mean} punktów
+                {index + 1}. {item.userData.name.fullName} : {item.mean} punkty
               </li>
             ) : index === 1 ? (
-              <li className='list-rank-li-snd' key={index.userId}>
-                {index + 1}. {item.userId} otrzymał {item.mean} punktów
+              <li className='list-rank-li-snd' key={item.userId}>
+                {index + 1}.{item.userData.name.fullName} : {item.mean} punkty
               </li>
             ) : index === 2 ? (
-              <li className='list-rank-li-trd' key={index.userId}>
-                {index + 1}. {item.userId} otrzymał {item.mean} punktów
+              <li className='list-rank-li-trd' key={item.userId}>
+                {index + 1}. {item.userData.name.fullName} : {item.mean} punkty
               </li>
             ) : (
               <li key={index.userId} className='list-rank-li'>
                 <div>
                   {' '}
-                  {index + 1}. {item.userId} otrzymał {item.mean} punktów{' '}
+                  {index + 1}. {item.userData.name.fullName} : {item.mean}{' '}
+                  punkty{' '}
                 </div>
               </li>
             )}
           </>
-        ))}
+        )): <div className='dots'></div>}
     </ul>
   );
 };

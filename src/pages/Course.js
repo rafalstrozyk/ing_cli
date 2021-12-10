@@ -6,7 +6,6 @@ import CourseTeachersList from '../components/CourseTeachersList';
 import CourseStudentsList from '../components/CourseStudentsList';
 import CourseWorksList from '../components/CourseWorksList';
 import { setIsLogin } from '../redux/actions/userActions';
-import RankList from '../components/RankList';
 import RankListMean from '../components/RankListMean';
 
 const Course = ({ setIsLogin, isLogin }) => {
@@ -15,20 +14,31 @@ const Course = ({ setIsLogin, isLogin }) => {
     [course, setCourse] = useState(null),
     [works, setWorks] = useState(null),
     [fullRank, setFullRank] = useState(null),
+    [showWorks, setShowWorks] = useState(false),
     { course_id } = useParams();
 
   useEffect(() => {
-    axios
-      .get('http://localhost:9000/classroom/api/course/full_rank', {
-        withCredentials: true,
-        params: {
-          course_id: course_id,
-        },
-      })
-      .then((res) => {
-        setFullRank(res.data);
-      });
-  }, [setFullRank]);
+    if (students) {
+      axios
+        .get('http://localhost:9000/classroom/api/course/full_rank', {
+          withCredentials: true,
+          params: {
+            course_id: course_id,
+          },
+        })
+        .then((res) => {
+          const arr = [];
+          res.data.forEach((item) => {
+            item.userData =
+              students[
+                students.findIndex((x) => x.userId === item.userId)
+              ].profile;
+            arr.push(item);
+          });
+          setFullRank(arr);
+        });
+    }
+  }, [setFullRank, course_id, students]);
   useEffect(() => {
     axios
       .get('http://localhost:9000/classroom/api/course', {
@@ -73,6 +83,7 @@ const Course = ({ setIsLogin, isLogin }) => {
   }, [setTeachers, course_id, setIsLogin]);
 
   const getWorksList = () => {
+    setShowWorks(true);
     axios
       .get('http://localhost:9000/classroom/api/course/work_list', {
         withCredentials: true,
@@ -87,33 +98,50 @@ const Course = ({ setIsLogin, isLogin }) => {
 
   return (
     <div className='grid-site'>
-      {course && (
+      {course ? (
         <>
-          <div className='container-center'>
+          <div className='container-center m-t-1'>
             <h1>{course.name}</h1>
           </div>
 
           <div className='container'>
             <div>
-              <p>sekcja: {course.section}</p>
-              <p>deskrypcja: {course.descriptionHeading}</p>
-              <p>pokój: {course.room}</p>
-              <p>mail grupowy: {course.courseGroupEmail}</p>
-              <p>mail grupowy nauczycieli: {course.teacherGroupEmail}</p>
-              <button onClick={getWorksList}>Course works</button>
-              <h3>Nauczyciele</h3>
-              <CourseTeachersList teachersArray={teachers} />
-              <h3>Uczniowie</h3>
-              <CourseStudentsList studentsArray={students} />
-              <h3>Zadania</h3>
-              <CourseWorksList worksArray={works} />
+              <div className='m-b-1'>
+                <p>sekcja: {course.section}</p>
+                <p>deskrypcja: {course.descriptionHeading}</p>
+                <p>pokój: {course.room}</p>
+              </div>
+              <div className='m-b-1'>
+                <h3>Nauczyciele</h3>
+                <CourseTeachersList teachersArray={teachers} />
+              </div>
+              <div className='m-b-1'>
+                <h3>Uczniowie</h3>
+                <CourseStudentsList studentsArray={students} />
+              </div>
+              <div className='m-b-1'>
+                {showWorks ? (
+                  <>
+                    <h3>Zadania</h3>
+                    <CourseWorksList worksArray={works} students={students} />
+                  </>
+                ) : (
+                  <button onClick={getWorksList}>Wyświetl Zadania</button>
+                )}
+              </div>
             </div>
             <div>
               <h3 className='ranking-header'>Najlepsi Uczniowie</h3>
-              <RankListMean rankList={fullRank} />
+              {students ? (
+                <RankListMean rankList={fullRank} students={students} />
+              ) : (
+                <p>... loading</p>
+              )}
             </div>
           </div>
         </>
+      ) : (
+        <div className='dots'></div>
       )}
     </div>
   );

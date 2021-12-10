@@ -15,22 +15,22 @@ const LoginWaiter = ({ setIsLogin, isLogin, setUserProfile, userProfile }) => {
   const [cookies] = useCookies(['jwt']);
   const history = useHistory();
 
-  // useEffect(() => {
-  //   if (cookies.jwt) {
-  //     axios
-  //       .get('http://localhost:9000/user/user_profile', {
-  //         withCredentials: true,
-  //       })
-  //       .then( (res) => {
-  //         if (res.data.id) {
-  //            setUserProfile(res.data);
-  //           console.log(res.data);
-  //            setIsLogin(res.data.isLogin);
-  //           history.push('/');
-  //         }
-  //       });
-  //   }
-  // }, [cookies, setUserProfile, setIsLogin, history]);
+  useEffect(() => {
+    if (cookies.jwt) {
+      axios
+        .get('http://localhost:9000/user/user_profile', {
+          withCredentials: true,
+        })
+        .then((res) => {
+          if (res.data.id) {
+            setUserProfile(res.data);
+            console.log(res.data);
+            setIsLogin(res.data.isLogin);
+            history.push('/');
+          }
+        });
+    }
+  }, [cookies, setUserProfile, setIsLogin, history]);
 
   useEffect(() => {
     if (cookies.jwt && !userProfile) {
@@ -79,7 +79,7 @@ const LoginWaiter = ({ setIsLogin, isLogin, setUserProfile, userProfile }) => {
 
   return (
     <div>
-      <p>...loading</p>
+      <div className='dots'></div>
     </div>
   );
 };

@@ -1,33 +1,17 @@
-import { useState } from 'react';
-import axios from 'axios';
-import RankList from './RankList';
+import RankListWorks from './RankListWorks';
 
-const CourseWorksList = ({ worksArray }) => {
-  // const [submisionWorksList, setSubmisionWorksList] = useState(null);
-  // const [showRank, setShowRank] = useState(false)
-  // function handleGetSubmisionList(course_id, work_id) {
-  //   axios
-  //     .get('http://localhost:9000/classroom/api/course/work_list_submissions', {
-  //       withCredentials: true,
-  //       params: {
-  //         course_id: course_id,
-  //         course_work_id: work_id,
-  //       },
-  //     })
-  //     .then((res) => {
-
-  //     });
-  // }
+const CourseWorksList = ({ worksArray, students }) => {
   return (
-    <ul>
+    <ul className='users-list'>
       {worksArray && worksArray.length > 0 ? (
         worksArray.map((work) => (
           <li key={work.id}>
-            <p>{work.title}</p>
-            <p>{work.updateTime}</p>
-            <p>{work.description}</p>
+            <h4>{work.title}</h4>
+            <p className="f-small">{work.updateTime}</p>
+            <p style={{marginBottom: '5px'}}>{work.description}</p>
             {work && (
-              <RankList
+              <RankListWorks
+                students={students}
                 workTitle={work.title}
                 courseId={work.courseId}
                 workId={work.id}
@@ -36,7 +20,7 @@ const CourseWorksList = ({ worksArray }) => {
           </li>
         ))
       ) : (
-        <p>Brak danych o zadaniach</p>
+        <div className='dots'></div>
       )}
     </ul>
   );

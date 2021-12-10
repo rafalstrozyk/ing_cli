@@ -4,7 +4,6 @@ import Home from './Home';
 import LoginWaiter from './LoginWaiter';
 import Course from './Course';
 import PrivateRoute from '../Router/PrivateRoute';
-import LeftNav from '../components/LeftNav';
 
 const Root = () => (
   <Switch>

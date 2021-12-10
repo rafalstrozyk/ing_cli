@@ -1,16 +1,15 @@
 const CourseTeachersList = ({ teachersArray }) => {
   return (
-    <ul>
+    <ul className='users-list'>
       {teachersArray && teachersArray.length > 0 ? (
         teachersArray.map((teacher) => (
           <li key={teacher.profile.id}>
             <p>Imie: {teacher.profile.name.givenName}</p>
             <p>Nazwisko: {teacher.profile.name.familyName}</p>
-            <p>userId: {teacher.userId}</p>
           </li>
         ))
       ) : (
-        <p>Brak danych o nauczycielach</p>
+        <div className='dots'></div>
       )}
     </ul>
   );
