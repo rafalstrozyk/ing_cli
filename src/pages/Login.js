@@ -8,8 +8,6 @@ import { ReactComponent as BookLogo } from '../Assets/BookLogo.svg';
 import background from '../Assets/Background.svg';
 
 const Login = ({ setIsLogin, setUserProfile }) => {
-  const [cookies] = useCookies(['jwt']);
-  const history = useHistory();
   const [link, setLink] = useState('');
   // useEffect(() => {
   //   if (cookies.jwt) {
@@ -31,7 +29,6 @@ const Login = ({ setIsLogin, setUserProfile }) => {
   useEffect(() => {
     axios.get('http://localhost:9000/user/google_login_link').then((res) => {
       setLink(res.data.loginLink);
-      console.log(res);
     });
   }, []);
 

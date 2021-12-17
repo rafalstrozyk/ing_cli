@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useLocation, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -16,7 +16,7 @@ const LoginWaiter = ({ setIsLogin, isLogin, setUserProfile, userProfile }) => {
   const history = useHistory();
 
   useEffect(() => {
-    if (cookies.jwt) {
+    if (cookies.jwt && cookies.jwt !== 'undefined') {
       axios
         .get('http://localhost:9000/user/user_profile', {
           withCredentials: true,
@@ -33,7 +33,7 @@ const LoginWaiter = ({ setIsLogin, isLogin, setUserProfile, userProfile }) => {
   }, [cookies, setUserProfile, setIsLogin, history]);
 
   useEffect(() => {
-    if (cookies.jwt && !userProfile) {
+    if (cookies.jwt && cookies.jwt !== 'undefined' && !userProfile) {
       axios
         .get('http://localhost:9000/user/user_profile', {
           withCredentials: true,
@@ -53,7 +53,6 @@ const LoginWaiter = ({ setIsLogin, isLogin, setUserProfile, userProfile }) => {
             withCredentials: true,
           })
           .then((res) => {
-            console.log(res);
             if (res.data.isLogin && res.data.id) {
               setUserProfile(res.data);
               setIsLogin(res.data.isLogin);

@@ -2,7 +2,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import './index.css';
 import Root from './pages/Root';
-import LeftNav from './components/LeftNav';
 
 import store from './redux/store';
 
