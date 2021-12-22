@@ -2,6 +2,18 @@
   background-color: #2a4594;
   height: 100vh;
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: #f7f7f7;
 }
 
+.nav-logout-btn {
+  margin-bottom: 40px;
+}
 
+.nav-content-container > *:not(:last-child) {
+  margin-bottom: 20px;
+}

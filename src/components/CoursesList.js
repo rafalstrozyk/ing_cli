@@ -3,7 +3,7 @@ import CoursesListCourse from './CoursesListCourse';
 const CoursesList = ({ courses }) => {
   return (
     <div>
-      <ul>
+      <ul className='users-list'>
         {courses &&
           courses.length > 0 &&
           courses.map((course) => (

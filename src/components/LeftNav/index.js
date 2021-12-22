@@ -13,7 +13,7 @@ const LeftNav = ({ user }) => {
     history.location.pathname.search('/courses/') !== -1
       ? setIsCoursePage(true)
       : setIsCoursePage(false);
-  }, [history, setIsCoursePage]);
+  }, [history.location, setIsCoursePage]);
 
   const handleLogout = () => {
     removeCookie('jwt');
@@ -24,13 +24,17 @@ const LeftNav = ({ user }) => {
     <>
       {user.isLogin && user.userProfile && (
         <div className='grid-navigation nav-root'>
-          <div>
+          <div className='nav-content-container'>
             <h3>{user.userProfile.name.fullName}</h3>
             <p>{user.userProfile.emailAddress}</p>
-            {isCoursePage && <Link to='/'>Strona główna</Link>}
+            {isCoursePage && (
+              <Link to='/' onClick={() => setIsCoursePage(false)}>
+                Strona główna
+              </Link>
+            )}
           </div>
-          <div>
-            <button onClick={handleLogout}>Logout</button>
+          <div className='nav-logout-btn'>
+            <button onClick={handleLogout}>Wyloguj</button>
           </div>
         </div>
       )}

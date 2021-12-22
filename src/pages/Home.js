@@ -10,7 +10,7 @@ const Home = ({ courses, getCourses }) => {
 
   return (
     <div className='grid-site'>
-      <h1>WWSSE Kursy </h1>
+      <h1 className='m-t-1'>WWSSE Kursy </h1>
       {courses.length > 0 ? (
         <CoursesList courses={courses} />
       ) : (

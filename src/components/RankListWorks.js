@@ -54,23 +54,23 @@ const RankListWorks = ({ courseId, workId, workTitle, students }) => {
                     {index === 0 ? (
                       <li className='list-rank-li-fst' key={item.userId}>
                         {index + 1}. {item.userData.name.fullName} :{' '}
-                        {item.assignedGrade} punkty
+                        {parseFloat(item.assignedGrade).toFixed(2)} punkty
                       </li>
                     ) : index === 1 ? (
                       <li className='list-rank-li-snd' key={item.userId}>
                         {index + 1}. {item.userData.name.fullName} :{' '}
-                        {item.assignedGrade} punkty
+                        {parseFloat(item.assignedGrade).toFixed(2)} punkty
                       </li>
                     ) : index === 2 ? (
                       <li className='list-rank-li-trd' key={item.userId}>
                         {index + 1}. {item.userData.name.fullName} :{' '}
-                        {item.assignedGrade} punkty
+                        {parseFloat(item.assignedGrade).toFixed(2)} punkty
                       </li>
                     ) : (
                       <li key={item.userId} className='list-rank-li'>
                         <div>
                           {index + 1}. {item.userData.name.fullName} :{' '}
-                          {item.assignedGrade} punkty
+                          {parseFloat(item.assignedGrade).toFixed(2)} punkty
                         </div>
                       </li>
                     )}

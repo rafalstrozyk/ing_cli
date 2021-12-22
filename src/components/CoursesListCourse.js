@@ -8,8 +8,8 @@ const CoursesListCourse = ({ course }) => {
   return (
     <li>
       <h4>{course.name}</h4>
-      <p style={{marginBottom: '6px'}}>Pokój: {course.room}</p>
-      <button onClick={moreInfoHandler}>More info</button>
+      <p style={{ marginBottom: '6px' }}>Pokój: {course.room}</p>
+      <button onClick={moreInfoHandler}>Szczegóły</button>
     </li>
   );
 };

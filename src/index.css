@@ -193,6 +193,10 @@ img {
   height: 100vh;
 }
 
+.book-logo {
+  fill: rgb(42, 69, 148);
+}
+
 .dots {
   width: 50px;
   height: 24px;
@@ -204,9 +208,7 @@ img {
   background-repeat: no-repeat;
   animation: d 1s infinite linear;
 }
-.book-logo {
-  fill: rgb(42, 69, 148);
-}
+
 @keyframes d {
   20% {
     background-position: 0% 0%, 50% 50%, 100% 50%;

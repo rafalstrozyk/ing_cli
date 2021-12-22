@@ -108,7 +108,7 @@ const Course = ({ setIsLogin, isLogin }) => {
             <div>
               <div className='m-b-1'>
                 <p>sekcja: {course.section}</p>
-                <p>deskrypcja: {course.descriptionHeading}</p>
+                <p>szczegóły: {course.descriptionHeading}</p>
                 <p>pokój: {course.room}</p>
               </div>
               <div className='m-b-1'>
